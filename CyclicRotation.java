@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class CyclicRotation {
     public static void main(String[] args) throws Exception {
         // System.out.println("Hello, World!");
@@ -56,17 +59,36 @@ public class CyclicRotation {
             System.out.println(aryStr);
         }
 
-        else if(ary.length + 1 == rotation){
+        else if(ary.length == rotation){
             System.out.println(aryStr);
         }
 
         else{
+            // int[] aryToEnd = Arrays.copyOf(ary, rotation);
+            // int[] aryToStart = Arrays.copyOfRange(ary, rotation, ary.length);
+            
+            int[] aryToStart = Arrays.copyOfRange(ary, rotation, ary.length);
             int[] aryToEnd = Arrays.copyOf(ary, rotation);
 
-            int[] aryToStart = Arrays.copyOfRange(ary, rotation - 1, ary.length);
-            
             System.out.println(Arrays.toString(aryToEnd));
             System.out.println(Arrays.toString(aryToStart));
+            
+            int[] aryCombined = new int[ary.length];
+            
+            for(int i = 0; i < ary.length; ++i){
+                if(i < aryToStart.length){
+                    aryCombined[i] = aryToStart[i];
+                }
+
+                else{
+                    // aryCombined[i] = aryToEnd[i+aryToStart.length];
+                    aryCombined[i] = aryToEnd[i-1];
+                }
+            }
+
+            System.out.println(Arrays.toString(aryCombined));
+            // List<Integer> lst = new ArrayList<>(Arrays.asList(aryToEnd));
+
         }
 
     }
